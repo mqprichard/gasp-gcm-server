@@ -15,12 +15,18 @@ import java.util.concurrent.Executors;
  *  Supports asynchronous multicasting of messages to 5 devices at a time
  */
 public class GCMMessageService {
-    private static final int MULTICAST_SIZE = 1000;
-    private static final String key = "AIzaSyD8RPFcX_YY3-M21yGGaww2_NBPLHsjU5o";
-    private Sender sender = new Sender(key);
-
     private static final Logger LOGGER = LoggerFactory.getLogger(GCMMessageService.class.getName());
     private static final Executor threadPool = Executors.newFixedThreadPool(5);
+    private static final int MULTICAST_SIZE = 1000;
+    private static Sender sender;
+
+    /**
+     * Constructor
+     * @param key Google API Key to use for the GCM service
+     */
+    public GCMMessageService(String key) {
+        sender = new Sender(key);
+    }
 
     /**
      * Sends a message via GCM. Calls asyncSend() to multicast messages asynchronously

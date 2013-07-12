@@ -14,6 +14,7 @@ import java.io.IOException;
 @Path("/gasp")
 public class DataSyncService {
     private static final Logger LOGGER = LoggerFactory.getLogger(DataSyncService.class.getName());
+    private static final String key = "AIzaSyD8RPFcX_YY3-M21yGGaww2_NBPLHsjU5o";
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
@@ -23,7 +24,7 @@ public class DataSyncService {
         LOGGER.info("  Id: " + String.valueOf(review.getId()));
 
         try {
-            GCMMessageService messageService = new GCMMessageService();
+            GCMMessageService messageService = new GCMMessageService(key);
             Message message = new Message.Builder()
                                          .delayWhileIdle(true)
                                          .addData("id", String.valueOf(review.getId()))
