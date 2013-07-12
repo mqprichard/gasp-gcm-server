@@ -18,7 +18,7 @@ public class GCMMessageService {
     private static final Logger LOGGER = LoggerFactory.getLogger(GCMMessageService.class.getName());
     private static final Executor threadPool = Executors.newFixedThreadPool(5);
 
-    public void sendMessage() throws IOException {
+    public void sendMessage(Message message) throws IOException {
         List<String> devices = Datastore.getDevices();
 
         if (devices.isEmpty()) {
@@ -26,7 +26,7 @@ public class GCMMessageService {
         } else {
             if (devices.size() == 1) {
                 String registrationId = devices.get(0);
-                Message message = new Message.Builder().build();
+                // Message message = new Message.Builder().build();
                 Result result = sender.send(message, registrationId, 5);
                 LOGGER.info("Sent message to one device: " + result);
             } else {

@@ -2,6 +2,7 @@
 package com.cloudbees.gasp.services;
 
 import com.cloudbees.gasp.model.Review;
+import com.google.android.gcm.server.Message;
 import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,7 +28,8 @@ public class DataSyncService {
 
         try {
             GCMMessageService messageService = new GCMMessageService();
-            messageService.sendMessage();
+            Message message = new Message.Builder().build();
+            messageService.sendMessage(message);
         } catch (IOException e) {
             LOGGER.error("Error sending GCM message", e);
         }
