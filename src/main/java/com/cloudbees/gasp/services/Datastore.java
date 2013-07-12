@@ -13,11 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.google.android.gcm.demo.server;
+package com.cloudbees.gasp.services;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
+
 
 /**
  * Simple implementation of a data store using standard Java collections.
@@ -28,8 +31,7 @@ import java.util.logging.Logger;
 public final class Datastore {
 
   private static final List<String> regIds = new ArrayList<String>();
-  private static final Logger logger =
-      Logger.getLogger(Datastore.class.getName());
+  private static final Logger LOGGER = LoggerFactory.getLogger(Datastore.class.getName());
 
   private Datastore() {
     throw new UnsupportedOperationException();
@@ -39,7 +41,7 @@ public final class Datastore {
    * Registers a device.
    */
   public static void register(String regId) {
-    logger.info("Registering " + regId);
+    LOGGER.debug("Registering " + regId);
     synchronized (regIds) {
       regIds.add(regId);
     }
@@ -49,7 +51,7 @@ public final class Datastore {
    * Unregisters a device.
    */
   public static void unregister(String regId) {
-    logger.info("Unregistering " + regId);
+    LOGGER.debug("Unregistering " + regId);
     synchronized (regIds) {
       regIds.remove(regId);
     }
@@ -59,7 +61,7 @@ public final class Datastore {
    * Updates the registration id of a device.
    */
   public static void updateRegistration(String oldId, String newId) {
-    logger.info("Updating " + oldId + " to " + newId);
+    LOGGER.debug("Updating " + oldId + " to " + newId);
     synchronized (regIds) {
       regIds.remove(oldId);
       regIds.add(newId);

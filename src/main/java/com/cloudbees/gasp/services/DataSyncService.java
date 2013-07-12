@@ -5,12 +5,14 @@ import com.cloudbees.gasp.model.Review;
 import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.io.IOException;
 
 @Path("/gasp")
-public class GCMService {
-    private static final Logger LOGGER = LoggerFactory.getLogger(GCMService.class.getName());
+public class DataSyncService {
+    private static final Logger LOGGER = LoggerFactory.getLogger(DataSyncService.class.getName());
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
@@ -22,6 +24,13 @@ public class GCMService {
         LOGGER.info("  Star: " + review.getStar());
         LOGGER.info("  Restaurant_id: " + String.valueOf(review.getRestaurant_id()));
         LOGGER.info("  User_id:" + String.valueOf(review.getUser_id()));
+
+        try {
+            GCMMessageService messageService = new GCMMessageService();
+            messageService.sendMessage();
+        } catch (IOException e) {
+            LOGGER.error("Error sending GCM message", e);
+        }
     }
 
     @GET
