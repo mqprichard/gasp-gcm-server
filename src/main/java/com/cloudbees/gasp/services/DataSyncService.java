@@ -21,14 +21,13 @@ public class DataSyncService {
         Review review = new Gson().fromJson(jsonInput, Review.class);
         LOGGER.info("New Review");
         LOGGER.info("  Id: " + String.valueOf(review.getId()));
-        LOGGER.info("  Comment: " + review.getComment());
-        LOGGER.info("  Star: " + review.getStar());
-        LOGGER.info("  Restaurant_id: " + String.valueOf(review.getRestaurant_id()));
-        LOGGER.info("  User_id:" + String.valueOf(review.getUser_id()));
 
         try {
             GCMMessageService messageService = new GCMMessageService();
-            Message message = new Message.Builder().build();
+            Message message = new Message.Builder()
+                                         .delayWhileIdle(true)
+                                         .addData("id", String.valueOf(review.getId()))
+                                         .build();
             messageService.sendMessage(message);
         } catch (IOException e) {
             LOGGER.error("Error sending GCM message", e);
