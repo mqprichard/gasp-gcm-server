@@ -32,12 +32,4 @@ public class DataSyncService {
             LOGGER.error("Error sending GCM message", e);
         }
     }
-
-    @GET
-    @Produces(MediaType.TEXT_PLAIN)
-    public String infoPage() {
-        return "CloudBees Gasp! GCM Server";
-    }
-
-
 }
