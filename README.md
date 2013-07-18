@@ -1,7 +1,7 @@
 Gasp! GCM for Android Demo Server
 ==================================================
 
-Push data synchronization server for Gasp! Android demo: uses CloudBees PaaS and Foxweave to provide automatic data sync between Gasp! server and Android SQLite on-device data store. This version shows a standalone server app, with data sync triggered by a FoxWeave Integration Pipeline: the next version will be implemented as a FoxWeave Connector, obviating the need for a separate server deployment.
+Push data synchronization server for Gasp! Android demo: uses CloudBees PaaS and Foxweave to provide automatic data sync between the Gasp! server database and Android SQLite on-device data stores. This version shows a standalone server app, with data sync triggered by a FoxWeave Integration Pipeline: the next version will be implemented as a FoxWeave Connector, obviating the need for a separate server deployment.
 
 The server uses [Google Cloud Messaging for Android](http://developer.android.com/google/gcm/index.html) to multicast Gasp! database updates to Android applications that register with the gasp-gcm-server application via simple HTTP calls (see GCMRegistration.java). The FoxWeave Integration service will call via WebHook the REST API exposed by DataSyncService.java, which it turn multicasts a GCM notification with the record id to registered devices.  The Android client can then call the Gasp! REST API to retrieve the review data and update its on-device database (see the gasp-gcm-client project for an example of how this works). The FoxWeave integration is currently set to poll the target database every minute, so for testing purposes you may want to trigger the pipeline manually to see the update notifications immediately.
 
