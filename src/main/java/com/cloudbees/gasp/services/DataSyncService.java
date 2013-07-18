@@ -14,17 +14,15 @@ import java.io.IOException;
 @Path("/gasp")
 public class DataSyncService {
     private static final Logger LOGGER = LoggerFactory.getLogger(DataSyncService.class.getName());
-    private static final String key = "AIzaSyD8RPFcX_YY3-M21yGGaww2_NBPLHsjU5o";
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public void reviewUpdateReceived(String jsonInput) {
         Review review = new Gson().fromJson(jsonInput, Review.class);
-        LOGGER.info("New Review");
-        LOGGER.info("  Id: " + String.valueOf(review.getId()));
+        LOGGER.info("Syncing Id: " + String.valueOf(review.getId()));
 
         try {
-            GCMMessageService messageService = new GCMMessageService(key);
+            GCMMessageService messageService = new GCMMessageService(new Config().getKey());
             Message message = new Message.Builder()
                                          .delayWhileIdle(true)
                                          .addData("id", String.valueOf(review.getId()))
