@@ -6,21 +6,20 @@ Push data synchronization server for Gasp! Android demo: uses CloudBees PaaS and
 Pre-reqs
 --------
 
-Set up the Gasp! server and database [gasp-server](https://github.com/cloudbees/gasp-server)
-Configure a FoxWeave Integration (Sync) App with a pipeline as follows:
-Source: MySQL 5 (pointing at your gasp-db)
-SQL Statement: select #id, #comment, #star, #restaurant_id, #user_id from review where id > ##id
-Target: WebHook
-Target URL: http://gasp-gcm-server.<cloudbees_user>.cloudbees.net
-JSON Message Structure:
-....
-{
+1. Set up the Gasp! server and database [gasp-server](https://github.com/cloudbees/gasp-server)
+2. Configure a FoxWeave Integration (Sync) App with a pipeline as follows:
+   - Source: MySQL 5 (pointing at your gasp-db)
+   - SQL Statement: select #id, #comment, #star, #restaurant_id, #user_id from review where id > ##id
+   - Target: WebHook
+   - Target URL: http://gasp-gcm-server.<cloudbees_user>.cloudbees.net
+   - JSON Message Structure:
+`{
     "id":1, 
     "comment":"blank", 
     "star":"three", 
     "restaurant_id":1, 
     "user_id":1
-}
+}`
 ....
 Data Mapping: id->${id}, comment->${comment} etc
 
