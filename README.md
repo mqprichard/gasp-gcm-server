@@ -3,12 +3,15 @@ Gasp! GCM for Android Demo Server
 
 Push data synchronization server for Gasp! Android demo: uses CloudBees PaaS and Foxweave to provide automatic data sync between Gasp! server and Android SQLite on-device data store. This version shows a standalone server app, with data sync triggered by a FoxWeave Integration Pipeline: the next version will be implemented as a FoxWeave Connector, obviating the need for a separate server deployment.
 
-Pre-reqs
---------
+There is an example Android demo client project [gasp-gcm-client](https://github.com/mqprichard/gasp-gcm-client) on GitHub. You will need to make sure that you use the Google APIs Project Number that corresponds to the API key used to run this server application. 
 
-1. Set up the Gasp! server and database [gasp-server](https://github.com/cloudbees/gasp-server)
+Setup
+-----
+
+1. Set up the Gasp! server and database: see [gasp-server](https://github.com/cloudbees/gasp-server) on GitHub
+
 2. Configure a FoxWeave Integration (Sync) App with a pipeline as follows:
-   - Source: MySQL 5 (pointing at your gasp-db)
+   - Source: MySQL 5 (pointing at your CloudBees MySQL Gasp database)
    - SQL Statement: select #id, #comment, #star, #restaurant_id, #user_id from review where id > ##id
    - Target: WebHook
    - Target URL: http://gasp-gcm-server.<cloudbees_user>.cloudbees.net
@@ -20,8 +23,21 @@ Pre-reqs
     "restaurant_id":1, 
     "user_id":1
 }`
-....
-Data Mapping: id->${id}, comment->${comment} etc
+   - Data Mapping: `id->${id}, comment->${comment}` etc
 
-Build with: mvn build install
-Deploy with bees app:deploy -a gasp-gcm-server target/gasp-gcm-server.war 
+3. Configure Google APIs for Google Cloud Messaging
+   - Logon to [Google APIs Console](https://code.google.com/apis/console)
+   - Services -> Google Cloud Messaging for Android = ON
+   - API Access -> Simple API Access -> Key for server apps (note API Key)
+   - Overview (note 12-digit Project Number for Android client)
+
+4. Deploy your FoxWeave Integration App on CloudBees and start it
+
+5. Build with: `mvn build install`
+
+6. Deploy to CloudBees: `bees app:deploy -a gasp-gcm-server target/gasp-gcm-server.war -P GCM_API_KEY=<your API key>`
+
+Viewing the Server Log
+----------------------
+
+You can view the server log using `bees app:tail -a gasp-gcm-server`
