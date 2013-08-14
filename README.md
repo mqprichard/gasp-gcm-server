@@ -16,7 +16,7 @@ Setup
    - Source: MySQL 5 (pointing at your CloudBees MySQL Gasp database)
    - SQL Statement: select #id, #comment, #star, #restaurant_id, #user_id from review where id > ##id
    - Target: WebHook
-   - Target URL: http://gasp-gcm-server.<cloudbees_user>.cloudbees.net
+   - Target URL: http://gasp-gcm-server.partnerdemo.cloudbees.net/reviews
    - JSON Message Structure:
 `{
     "id":1, 
