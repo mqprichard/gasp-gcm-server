@@ -1,5 +1,5 @@
-Gasp! GCM for Android Demo Server
-==================================================
+Gasp! GCM Push Notification Server
+----------------------------------
 
 Push data synchronization server for Gasp! Android demo: uses CloudBees PaaS and Foxweave to provide automatic data sync between the Gasp! server database and Android SQLite on-device data stores. This version shows a standalone server app, with data sync triggered by a FoxWeave Integration Pipeline: the next version will be implemented as a FoxWeave Connector, obviating the need for a separate server deployment.
 
@@ -16,7 +16,7 @@ Setup
    - Source: MySQL 5 (pointing at your CloudBees MySQL Gasp database)
    - SQL Statement: select #id, #comment, #star, #restaurant_id, #user_id from review where id > ##id
    - Target: WebHook
-   - Target URL: http://gasp-gcm-server.<cloudbees_user>.cloudbees.net
+   - Target URL: http://gasp-gcm-server.partnerdemo.cloudbees.net/reviews
    - JSON Message Structure:
 `{
     "id":1, 
