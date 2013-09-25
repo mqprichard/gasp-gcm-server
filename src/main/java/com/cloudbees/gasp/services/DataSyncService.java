@@ -20,25 +20,29 @@ import com.cloudbees.gasp.model.Restaurant;
 import com.cloudbees.gasp.model.Review;
 import com.cloudbees.gasp.model.User;
 import com.google.android.gcm.server.Message;
-import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import java.io.IOException;
 
 @Path("/")
+@Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
 public class DataSyncService {
     private static final Logger LOGGER = LoggerFactory.getLogger(DataSyncService.class.getName());
 
+    /**
+     * Add a new review: send GCM message
+     * @param review
+     */
     @POST
-    @Path("/reviews")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public void reviewUpdateReceived(String jsonInput) {
-        Review review = new Gson().fromJson(jsonInput, Review.class);
+    @Path("/review")
+    public void reviewUpdateReceived(Review review) {
         LOGGER.info("Syncing Review Id: " + String.valueOf(review.getId()));
 
         try {
@@ -54,11 +58,13 @@ public class DataSyncService {
         }
     }
 
+    /**
+     * Add a new restaurant: send GCM message
+     * @param restaurant
+     */
     @POST
-    @Path("/restaurants")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public void restaurantUpdateReceived(String jsonInput) {
-        Restaurant restaurant = new Gson().fromJson(jsonInput, Restaurant.class);
+    @Path("/restaurant")
+    public void restaurantUpdateReceived(Restaurant restaurant) {
         LOGGER.info("Syncing Restaurant Id: " + String.valueOf(restaurant.getId()));
 
         try {
@@ -74,11 +80,13 @@ public class DataSyncService {
         }
     }
 
+    /**
+     * Add a new user: send GCM message
+     * @param user
+     */
     @POST
-    @Path("/users")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public void userUpdateReceived(String jsonInput) {
-        User user = new Gson().fromJson(jsonInput, User.class);
+    @Path("/user")
+    public void userUpdateReceived(User user) {
         LOGGER.info("Syncing User Id: " + String.valueOf(user.getId()));
 
         try {
