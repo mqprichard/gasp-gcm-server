@@ -1,0 +1,31 @@
+{
+    "review": {
+        "label": "Review",
+        "fields" : [
+            {"name":"id", "label":"id"},
+            {"name":"comment", "label":"comment"},
+            {"name":"star", "label":"star"},
+            {"name":"restaurant_id", "label":"restaurant_id"},
+            {"name":"user_id", "label":"user_id"}
+        ],
+        "rest": "/review"
+    },
+    "restaurant": {
+        "label": "Restaurant",
+        "fields" : [
+            {"name":"id", "label":"id"},
+            {"name":"name", "label":"name"},
+            {"name":"website", "label":"website"},
+            {"name":"address", "label":"address"}
+        ],
+        "rest": "/restaurant"
+    },
+    "user": {
+        "label": "User",
+        "fields" : [
+            {"name":"id", "label":"id"},
+            {"name":"name", "label":"name"}
+        ],
+        "rest": "/user"
+    }
+}

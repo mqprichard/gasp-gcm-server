@@ -22,15 +22,22 @@ import org.slf4j.LoggerFactory;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.Properties;
 
 public class Config implements ServletContextListener {
     private static final Logger LOGGER = LoggerFactory.getLogger(Config.class.getName());
+    private static final String CLOUDBEES_APP_MODEL = "/WEB-INF/cloudbees-app-model.json";
     private static String key = "";
     private static String envBuildSecretDir = null;
 
     public String getKey() {
         return key;
+    }
+
+    static String convertStreamToString(InputStream is) {
+        java.util.Scanner s = new java.util.Scanner(is).useDelimiter("\\A");
+        return s.hasNext() ? s.next() : "";
     }
 
     /**
@@ -68,6 +75,12 @@ public class Config implements ServletContextListener {
             else {
                 LOGGER.error("GCM_API_KEY not set");
             }
+
+            // CLOUDBEES_APP_MODEL is used by WEAVEFilter/WEAVEHook
+            InputStream runAppModelJson = event.getServletContext().getResourceAsStream(CLOUDBEES_APP_MODEL);
+            String cloudbeesAppModel = convertStreamToString(runAppModelJson);
+            LOGGER.info("CloudBees App Model: " + cloudbeesAppModel);
+            runAppModelJson.close();
         }
         catch (Exception e){
             e.printStackTrace();
