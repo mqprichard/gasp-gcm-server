@@ -41,7 +41,7 @@ public class DataSyncService {
      * @param review
      */
     @POST
-    @Path("/review")
+    @Path("/review/created")
     public void reviewUpdateReceived(Review review) {
         LOGGER.info("Syncing Review Id: " + String.valueOf(review.getId()));
 
@@ -63,7 +63,7 @@ public class DataSyncService {
      * @param restaurant
      */
     @POST
-    @Path("/restaurant")
+    @Path("/restaurant/created")
     public void restaurantUpdateReceived(Restaurant restaurant) {
         LOGGER.info("Syncing Restaurant Id: " + String.valueOf(restaurant.getId()));
 
@@ -85,7 +85,7 @@ public class DataSyncService {
      * @param user
      */
     @POST
-    @Path("/user")
+    @Path("/user/created")
     public void userUpdateReceived(User user) {
         LOGGER.info("Syncing User Id: " + String.valueOf(user.getId()));
 
