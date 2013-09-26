@@ -37,7 +37,7 @@ public class DataSyncService {
     private static final Logger LOGGER = LoggerFactory.getLogger(DataSyncService.class.getName());
 
     /**
-     * Add a new review: send GCM message
+     * Received a new review: send GCM message
      * @param review
      */
     @POST
@@ -59,7 +59,7 @@ public class DataSyncService {
     }
 
     /**
-     * Add a new restaurant: send GCM message
+     * Received a new restaurant notification: send GCM message
      * @param restaurant
      */
     @POST
@@ -81,7 +81,7 @@ public class DataSyncService {
     }
 
     /**
-     * Add a new user: send GCM message
+     * Received a new user notification: send GCM message
      * @param user
      */
     @POST

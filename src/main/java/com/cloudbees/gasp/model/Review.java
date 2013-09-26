@@ -47,19 +47,39 @@ public class Review {
         return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getComment() {
         return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
     public String getStar() {
         return star;
     }
 
+    public void setStar(String star) {
+        this.star = star;
+    }
+
     public int getRestaurant_id() {
         return restaurant_id;
     }
 
+    public void setRestaurant_id(int restaurant_id) {
+        this.restaurant_id = restaurant_id;
+    }
+
     public int getUser_id() {
         return user_id;
+    }
+
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
     }
 }
