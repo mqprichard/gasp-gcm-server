@@ -53,7 +53,7 @@ public class GCMMessageService {
         List<String> devices = Datastore.getDevices();
 
         if (devices.isEmpty()) {
-            LOGGER.error("Message ignored as there is no device registered!");
+            LOGGER.info("Message ignored as there is no device registered!");
         } else {
             int total = devices.size();
             List<String> partialDevices = new ArrayList<String>(total);
