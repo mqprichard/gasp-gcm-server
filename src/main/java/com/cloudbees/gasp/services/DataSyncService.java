@@ -16,6 +16,7 @@
 
 package com.cloudbees.gasp.services;
 
+import com.cloudbees.gasp.GaspGCMServlet;
 import com.cloudbees.gasp.model.Restaurant;
 import com.cloudbees.gasp.model.Review;
 import com.cloudbees.gasp.model.User;
@@ -46,7 +47,7 @@ public class DataSyncService {
         LOGGER.info("Syncing Review Id: " + String.valueOf(review.getId()));
 
         try {
-            GCMMessageService messageService = new GCMMessageService(new Config().getKey());
+            GCMMessageService messageService = new GCMMessageService(new GaspGCMServlet().getKey());
             Message message = new Message.Builder()
                                          .delayWhileIdle(true)
                                          .addData("table", "reviews")
@@ -68,7 +69,7 @@ public class DataSyncService {
         LOGGER.info("Syncing Restaurant Id: " + String.valueOf(restaurant.getId()));
 
         try {
-            GCMMessageService messageService = new GCMMessageService(new Config().getKey());
+            GCMMessageService messageService = new GCMMessageService(new GaspGCMServlet().getKey());
             Message message = new Message.Builder()
                                          .delayWhileIdle(true)
                                          .addData("table", "restaurants")
@@ -90,7 +91,7 @@ public class DataSyncService {
         LOGGER.info("Syncing User Id: " + String.valueOf(user.getId()));
 
         try {
-            GCMMessageService messageService = new GCMMessageService(new Config().getKey());
+            GCMMessageService messageService = new GCMMessageService(new GaspGCMServlet().getKey());
             Message message = new Message.Builder()
                                          .delayWhileIdle(true)
                                          .addData("table", "users")

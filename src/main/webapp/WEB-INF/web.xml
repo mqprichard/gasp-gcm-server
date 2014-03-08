@@ -32,14 +32,6 @@
         <url-pattern>/*</url-pattern>
     </servlet-mapping>
     <listener>
-        <listener-class>com.cloudbees.gasp.services.Config</listener-class>
+        <listener-class>com.cloudbees.gasp.GaspGCMServlet</listener-class>
     </listener>
-    <filter>
-        <filter-name>WEAVEFilter</filter-name>
-        <filter-class>com.cloudbees.weave.api.jee.filter.WEAVEFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>WEAVEFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
 </web-app>
