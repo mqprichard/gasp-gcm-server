@@ -103,6 +103,12 @@
             <version>4.11</version>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>com.foxweave</groupId>
+            <artifactId>foxweave-cloudbees-api-jee</artifactId>
+            <version>0.2-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <properties>
@@ -116,6 +122,10 @@
             <name>Java.net Maven 2 Repository</name>
             <url>http://download.java.net/maven/2</url>
             <layout>default</layout>
+        </repository>
+        <repository>
+            <id>foxweave</id>
+            <url>http://maven.foxweave.com/snapshots/</url>
         </repository>
     </repositories>
 
