@@ -18,23 +18,34 @@ Setup
    - API Access -> Simple API Access -> Key for server apps (note API Key)
    - Overview (note 12-digit Project Number for Android client)
 
-3. Build with: `mvn build install`
 
-4. Deploy to CloudBees: `bees app:deploy -a gasp-gcm-server target/gasp-gcm-server.war -P GCM_API_KEY=<your API key>`
+3. Build with:
 
-5. Configure a FoxWeave Integration (Sync) App 
+   `mvn build install`
 
-6. Add a pipeline for each table {review, restaurant, user}:
-   - Source: MySQL 5 (pointing at your CloudBees MySQL Gasp database)
-   - Table/View = {restaurant | review | user}
-   - Add data filter rule: "id greater than last sync value"
-   - Target: CloudBees App
-   - App Name: gasp-gcm-server  App Event: {Review | Restaurant | User} 
-   - Data Mapping: `id->${id}, ...` etc for each JSON field
+4. Deploy to CloudBees:
 
-7. Deploy your FoxWeave Integration App on CloudBees and start it
+   `bees app:deploy -a gasp-gcm-server target/gasp-gcm-server.war -P GCM_API_KEY=<your API key>`
 
-Viewing the Server Log
-----------------------
+5. To send a GCM update message using curl and scripts from [gasp-scripts](https://github.com/mqprichard/gasp-scripts):
+   - Create a review with addReview and note Location header in response:
 
-You can view the server log using `bees app:tail -a gasp-gcm-server`
+   `curl -i -H Content-Type:application/json -X POST http://gasp2.partnerdemo.cloudbees.net/reviews -d {"star":5,"comment":"Nice","user":"http://gasp2.partnerdemo.cloudbees.net/users/1","restaurant":"http://gasp2.partnerdemo.cloudbees.net/restaurants/136"}`
+
+   `Location: http://gasp2.partnerdemo.cloudbees.net/reviews/432`
+
+   - Use getReview for JSON-formatted review data, e.g.
+
+   `curl -i http://gasp2.partnerdemo.cloudbees.net/reviews/432`
+
+   `{"star":5,"comment":"Nice","id":432,"url":"/reviews/432","restaurant":"/restaurants/136","user":"/users/1"}`
+
+   - Call the /review/created REST endpoint on gaso-gcm-server, e.g.
+
+   `curl http://gasp-gcm-server.partnerdemo.cloudbees.net/review/created -H "Content-Type:application/json" -d '{"star":5,"comment":"Nice","id":432,"url":"/reviews/432","restaurant":"/restaurants/136","user":"/users/1"}'`
+
+   - View the update in the gasp-gcm-server log
+
+   `bees app:tail -a gasp-gcm-server`
+
+   `INFO  DataSyncService - Syncing Review Id: 432`
