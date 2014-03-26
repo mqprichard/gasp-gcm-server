@@ -118,9 +118,9 @@
             <layout>default</layout>
         </repository>
         <repository>
-            <id>cloudbees-private-release-repository</id>
-            <name>CloudBees partnerdemo private release repository</name>
-            <url>https://repository-mqprichard.forge.cloudbees.com/release/</url>
+            <id>artifactory-ext-releases-local</id>
+            <name>Artifactory online ext-releases-local repository</name>
+            <url>http://partnerdemo.artifactoryonline.com/partnerdemo/plugins-releases-local/</url>
             <layout>default</layout>
         </repository>
     </repositories>
