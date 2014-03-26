@@ -117,6 +117,12 @@
             <url>http://download.java.net/maven/2</url>
             <layout>default</layout>
         </repository>
+        <repository>
+            <id>cloudbees-private-release-repository</id>
+            <name>CloudBees partnerdemo private release repository</name>
+            <url>https://repository-mqprichard.forge.cloudbees.com/release/</url>
+            <layout>default</layout>
+        </repository>
     </repositories>
 
     <pluginRepositories>
