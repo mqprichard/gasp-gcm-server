@@ -127,6 +127,12 @@
             <id>foxweave</id>
             <url>http://maven.foxweave.com/snapshots/</url>
         </repository>
+        <repository>
+            <id>artifactory-ext-releases-local</id>
+            <name>Artifactory online ext-releases-local repository</name>
+            <url>http://partnerdemo.artifactoryonline.com/partnerdemo/plugins-releases-local/</url>
+            <layout>default</layout>
+        </repository>
     </repositories>
 
     <pluginRepositories>
