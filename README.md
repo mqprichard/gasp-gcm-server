@@ -33,13 +33,13 @@ Setup
    `bees app:deploy -a gasp-gcm-server target/gasp-gcm-server.war -P GCM_API_KEY=<your API key>`
 
 5. To send a GCM update message using curl and scripts from [gasp-scripts](https://github.com/mqprichard/gasp-scripts):
-   - Create a review with addReview and note Location header in response:
+   - Create a review and note Location header in response:
 
    `curl -i -H Content-Type:application/json -X POST http://gasp.mqprichard.cloudbees.net/reviews -d {"star":5,"comment":"Nice","user":"/users/1","restaurant":"/restaurants/136"} `
 
    `Location: http://gasp.mqprichard.cloudbees.net/reviews/432`
 
-   - Use getReview for JSON-formatted review data, e.g.
+   - Get the JSON-formatted review data, e.g.
 
    `curl -i http://gasp.mqprichard.cloudbees.net/reviews/432`
 
