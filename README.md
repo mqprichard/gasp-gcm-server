@@ -35,9 +35,9 @@ Setup
 5. To send a GCM update message using curl and scripts from [gasp-scripts](https://github.com/mqprichard/gasp-scripts):
    - Create a review with addReview and note Location header in response:
 
-    `curl -i -H Content-Type:application/json -X POST http://gasp.mqprichard.cloudbees.net/reviews -d {"star":5,"comment":"Nice","user":"http://gasp2.partnerdemo.cloudbees.net/users/1","restaurant":"http://gasp2.partnerdemo.cloudbees.net/restaurants/136"}`
+   `curl -i -H Content-Type:application/json -X POST http://gasp.mqprichard.cloudbees.net/reviews -d {"star":5,"comment":"Nice","user":"/users/1","restaurant":"/restaurants/136"}`
 
-    `Location: http://gasp.mqprichard.cloudbees.net/reviews/432`
+   `Location: http://gasp.mqprichard.cloudbees.net/reviews/432`
 
    - Use getReview for JSON-formatted review data, e.g.
 
