@@ -26,7 +26,7 @@ Setup
 
 3. Build with:
 
-   `mvn build install`
+   `mvn clean install`
 
 4. Deploy to CloudBees:
 
